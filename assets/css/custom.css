@@ -1,0 +1,17 @@
+/* Custom page CSS
+-------------------------------------------------- */
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}  
+.navbar-custom {
+  background-color: lightgreen;
+}
+
+.footer {
+  text-align: center;
+  background-color: lightgreen;
+}
+
+.bg-lightgreen {
+  background-color: lightgreen;
+}
