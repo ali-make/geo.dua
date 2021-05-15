@@ -107,7 +107,6 @@ class Users extends CI_Controller
         $data['title'] = 'Ubah Profile';
         $data['profile'] = $this->users_model->signin(['email' => $this->session->userdata('email')])->row_array();
         
-
         $this->form_validation->set_rules('username', 'Username', 'required|trim', ['required' => 'Username can not be null']);
 
         if ($this->form_validation->run() == FALSE) {
@@ -124,24 +123,25 @@ class Users extends CI_Controller
             $upload_image = $_FILES['image']['name'];
 
             if ($upload_image) {
-                $config['upload_path'] = './assets/img/';
+                $config['upload'] = './assets/img/';
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max-size'] = '10000';
-                $config['max-width'] = '2024';
-                $config['max-height'] = '2024';
-                $config['file_name'] = 'profile' . time();
+                $config['max_size'] = '10000';
+                $config['max_width'] = '1024';
+                $config['max_height'] = '1024';
+                $config['file_name'] = 'profile_' . time();
 
                 $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('image')) {
                     $gambar_lama = $data['profile']['img'];
+
                     if ($gambar_lama != 'default.png') {
-                        unlink(FCPATH . '/assets/img/' . $gambar_lama);
+                        unlink(FCPATH . 'assets/img/' . $gambar_lama);
                     }
 
                     $gambar_baru = $this->upload->data('file_name');
                     $this->db->set('img', $gambar_baru);
-                } else { }
+                } else {}
             }
 
             $this->db->set('username', $username);
