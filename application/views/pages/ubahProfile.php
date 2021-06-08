@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-sm-10 py-3">
                         <div class="custom-file">
-                            <input type="file" id="image" name="image" class="custom-file-input" required>
+                            <input type="file" id="image" name="image" class="custom-file-input">
                             <label for="image" class="custom-file-label">Pilih gambar</label>
                         </div>
                     </div>

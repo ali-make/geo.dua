@@ -21,17 +21,16 @@ class Users_model extends CI_Model
         return $this->db->insert('users', $data);
     }
 
-    public function signin($where = null)
+    public function signin($email, $password)
     {
-       return $this->db->get_where('users', $where);
-    }
+        // validate
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
 
-    public function email_exists($email)
-    {
-        $query = $this->db->get_where('users', array('email' => $email));
+        $result = $this->db->get('users');
 
-        if (empty($query->row_array())) {
-            return true;
+        if ($result->num_rows() == 1) {
+            return $result->row(0)->id;
         } else {
             return false;
         }
@@ -46,5 +45,21 @@ class Users_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->update('users', $data);
+    }
+
+    public function cekUser($where = null) 
+    {
+        return $this->db->get_where('users', $where);
+    }
+
+    public function email_exists($email)
+    {
+        $query = $this->db->get_where('users', array('email' => $email));
+
+        if (empty($query->row_array())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

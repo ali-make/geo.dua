@@ -6,13 +6,14 @@ class Pages extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('session');
-        $this->load->database('users_model');
+        $this->load->model('users_model', 'locations_model');
     }
 
     public function index()
     {
         $data['title'] = 'Home';
-        $data['profile'] = $this->users_model->signin(['email' => $this->session->userdata('email')])->row_array();
+        $data['profile'] = $this->session->userdata();
+        $data['loc'] = $this->locations_model->get_loc();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
@@ -30,13 +31,26 @@ class Pages extends CI_Controller {
         }
 
         $data['title'] = ucfirst($page);
-        $data['profile'] = $this->users_model->signin(['email' => $this->session->userdata('email')])->row_array();
+        $data['profile'] = $this->session->userdata();
         $data['user'] = $this->users_model->getUsers()->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('templates/flashdata', $data);
         $this->load->view('pages/'.$page, $data);
+        $this->load->view('templates/footer', $data); 
+    }
+
+    public function buka($slug)
+    {
+        $data['title'] = 'View Post';
+        $data['profile'] = $this->session->userdata();
+        $data['post'] = $this->locations_model->view_loc($slug);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/flashdata');
+        $this->load->view('pages/view', $data);
         $this->load->view('templates/footer', $data); 
     }
 }

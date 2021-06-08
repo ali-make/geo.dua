@@ -50,7 +50,7 @@ class Users extends CI_Controller
             $email = $this->input->post('email', true);
             $password = md5($this->input->post('password', true));
 
-            $user_id = $this->users_model->signin(['email' => $email, 'password' => $password])->row_array();
+            $user_id = $this->users_model->signin($email, $password);
 
             if ($user_id) {
                 $user_data = array(
@@ -94,7 +94,7 @@ class Users extends CI_Controller
     public function profile()
     {
         $data['title'] = 'Profile';
-        $data['profile'] = $this->users_model->signin(['email' => $this->session->userdata('email')])->row_array();
+        $data['profile'] = $this->users_model->cekUser(['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
@@ -105,7 +105,7 @@ class Users extends CI_Controller
     public function ubahProfile()
     {
         $data['title'] = 'Ubah Profile';
-        $data['profile'] = $this->users_model->signin(['email' => $this->session->userdata('email')])->row_array();
+        $data['profile'] = $this->users_model->cekUser(['email' => $this->session->userdata('email')])->row_array();
         
         $this->form_validation->set_rules('username', 'Username', 'required|trim', ['required' => 'Username can not be null']);
 

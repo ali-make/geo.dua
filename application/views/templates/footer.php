@@ -11,9 +11,9 @@
 	});
 </script>
 <footer class="footer py-3 mt-3 rounded">
-	<span class="text-muted"><a href="<?= base_url('howto'); ?>" class="" style="text-decoration: none;">How to</a> &bull; <a href="<?= base_url('team'); ?>" class="" style="text-decoration: none;">Team</a></span>
+	<span class="text-muted"><a href="<?= base_url('howto'); ?>" class="" style="text-decoration: none;">HOWTO</a> &bull; <a href="<?= base_url('team'); ?>" class="" style="text-decoration: none;">TEAM</a></span>
 	<br>
-	<span class="text-muted">&COPY; 2021 <?php echo lacak . sampah . com; ?></span>
+	<span class="text-muted">&COPY; 2021 <a href="<?= base_url(); ?>" style="text-decoration: none;"><?php echo lacak . sampah . com; ?></a></span>
 </footer>
 </body>
 
